@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Montefiore-Einstein | Food & Nutrition Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg-main: #0b1724;
+      --bg-panel: #101b2b;
+      --bg-panel-alt: #172338;
+      --accent: #2f6dcc;
+      --accent-soft: rgba(47, 109, 204, 0.15);
+      --text-main: #f5f7fb;
+      --text-muted: #a2aec6;
+      --border-subtle: #25324a;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --radius-lg: 18px;
+      --transition-fast: 180ms ease-out;
+      --transition-med: 260ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #16253a, #050914 60%);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      animation: fadeInBody 650ms ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HEADER */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: linear-gradient(90deg, #050914, #0b1724, #050914);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo-wrapper img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.6));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.2;
+    }
+
+    .brand-line-1 {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .brand-line-2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-line-3 {
+      font-size: 0.88rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .header-spacer {
+      flex: 1;
+    }
+
+    .header-tagline {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: right;
+      max-width: 260px;
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        padding-inline: 16px;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .header-spacer {
+        display: none;
+      }
+
+      .header-tagline {
+        text-align: left;
+        max-width: 100%;
+      }
+    }
+
+    /* MAIN LAYOUT */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 32px 16px 40px;
+    }
+
+    .main-inner {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .main-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* INTRO PANEL */
+    .intro-card {
+      background: radial-gradient(circle at top left, rgba(47,109,204,0.15), transparent 55%),
+                  var(--bg-panel);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 24px 24px 22px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(4px);
+      animation: slideUpIntro 540ms var(--transition-med) forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideUpIntro {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .intro-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(47,109,204,0.25);
+    }
+
+    .intro-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .intro-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .intro-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .intro-meta span {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(5, 9, 20, 0.6);
+    }
+
+    .intro-footer {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+    }
+
+    /* DROPDOWN PANEL */
+    .hub-card {
+      background: var(--bg-panel-alt);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 22px 20px 18px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transform: translateY(8px);
+      animation: slideUpHub 620ms var(--transition-med) forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideUpHub {
+      from { opacity: 0; transform: translateY(15px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hub-label {
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hub-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .hub-description {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* Fancy dropdown */
+    .dropdown-container {
+      position: relative;
+      margin-top: 4px;
+    }
+
+    .dropdown-button {
+      width: 100%;
+      appearance: none;
+      background: linear-gradient(135deg, #101b2b, #151f33);
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      padding: 11px 14px;
+      padding-right: 42px;
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background var(--transition-fast),
+                  box-shadow var(--transition-fast),
+                  transform var(--transition-fast),
+                  border-color var(--transition-fast);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+    }
+
+    .dropdown-button:hover {
+      background: linear-gradient(135deg, #151f33, #1c2a41);
+      border-color: var(--accent);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .dropdown-button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .dropdown-button-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dropdown-button-main {
+      font-weight: 500;
+    }
+
+    .dropdown-button-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .dropdown-chevron {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      transform-origin: center;
+      transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .dropdown-button[aria-expanded="true"] .dropdown-chevron {
+      transform: rotate(180deg);
+      border-color: var(--accent);
+      background: rgba(47, 109, 204, 0.16);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      z-index: 20;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #060a13;
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.75);
+      padding: 8px 6px;
+      transform-origin: top center;
+      transform: scaleY(0.95) translateY(-4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-med),
+                  transform var(--transition-med);
+    }
+
+    .dropdown-menu.open {
+      opacity: 1;
+      transform: scaleY(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown-list {
+      list-style: none;
+      max-height: 320px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .dropdown-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .dropdown-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .dropdown-list::-webkit-scrollbar-thumb {
+      background: #222f47;
+      border-radius: 999px;
+    }
+
+    .dropdown-item + .dropdown-item {
+      margin-top: 4px;
+    }
+
+    .dropdown-link {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+      color: var(--text-main);
+    }
+
+    .dropdown-link:hover {
+      background: linear-gradient(90deg, rgba(47, 109, 204, 0.24), rgba(33, 49, 82, 0.9));
+      transform: translateY(-1px);
+    }
+
+    .dropdown-link-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .dropdown-link-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .dropdown-pill {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    /* Small helper row under dropdown */
+    .hub-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .hub-hint span {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
+      .hub-hint {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-wrapper">
+        <!-- Replace "logo.png" with your actual Montefiore-Einstein logo path -->
+        <img src="logo.png" alt="Montefiore-Einstein Logo" />
+        <div class="brand-text">
+          <div class="brand-line-1">Montefiore-Einstein</div>
+          <div class="brand-line-2">Food &amp; Nutrition</div>
+          <div class="brand-line-3">Clinical &amp; Patient Services</div>
+        </div>
+      </div>
+
+      <div class="header-spacer"></div>
+
+      <p class="header-tagline">
+        Central hub for menus, education, and operational tools for the Food &amp; Nutrition team.
+      </p>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <div class="main-inner">
+      <!-- LEFT: Intro -->
+      <section class="intro-card" aria-labelledby="intro-title">
+        <div class="intro-pill">
+          <span class="intro-pill-dot" aria-hidden="true"></span>
+          Food &amp; Nutrition Hub
+        </div>
+
+        <h1 id="intro-title" class="intro-title">
+          One place for all your nutrition resources.
+        </h1>
+        <p class="intro-subtitle">
+          Use the dropdown on the right to jump directly to menus, clinical references, patient
+          education, and department tools. Everything opens in a separate tab so your hub is always open.
+        </p>
+
+        <div class="intro-meta">
+          <span>✔ Staff tools</span>
+          <span>✔ Patient education</span>
+          <span>✔ Operational documents</span>
+        </div>
+
+        <div class="intro-footer">
+          Tip: Bookmark this page in your browser so you always have quick access at the start of your shift.
+        </div>
+      </section>
+
+      <!-- RIGHT: Fancy dropdown -->
+      <section class="hub-card" aria-labelledby="hub-title">
+        <p class="hub-label">Navigation</p>
+        <h2 id="hub-title" class="hub-title">Open a nutrition resource</h2>
+        <p class="hub-description">
+          Select an item from the list below. Each option will open in a new browser tab.
+        </p>
+
+        <div class="dropdown-container">
+          <button
+            id="hubDropdownButton"
+            class="dropdown-button"
+            type="button"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span class="dropdown-button-label">
+              <span class="dropdown-button-main">Choose a resource…</span>
+              <span class="dropdown-button-sub">Staff tools, menus, diet guides, and more.</span>
+            </span>
+            <span class="dropdown-chevron" aria-hidden="true">▾</span>
+          </button>
+
+          <div
+            id="hubDropdownMenu"
+            class="dropdown-menu"
+            role="listbox"
+            aria-labelledby="hubDropdownButton"
+          >
+            <ul class="dropdown-list">
+              <!-- EXAMPLE LINKS: edit labels + hrefs to match your real resources -->
+              <li class="dropdown-item">
+                <a
+                  class="dropdown-link"
+                  href="https://example.com/staff-dashboard"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="dropdown-link-title">Staff Dashboard</span>
+                  <span class="dropdown-link-meta">
+                    Daily schedule, assignments, and core department tools.
+                  </span>
+                </a>
+              </li>
+
+              <li class="dropdown-item">
+                <a
+                  class="dropdown-link"
+                  href="https://example.com/patient-menus"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="dropdown-link-title">Patient Menus &amp; Diet Patterns</span>
+                  <span class="dropdown-link-meta">
+                    Current cycle menus, therapeutic diets, and allergen information.
+                  </span>
+                </a>
+              </li>
+
+              <li class="dropdown-item">
+                <a
+                  class="dropdown-link"
+                  href="https://example.com/patient-education"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="dropdown-link-title">Patient Education Materials</span>
+                  <span class="dropdown-link-meta">
+                    Printable handouts and teaching tools for common conditions.
+                  </span>
+                </a>
+              </li>
+
+              <li class="dropdown-item">
+                <a
+                  class="dropdown-link"
+                  href="https://example.com/allergen-guide"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="dropdown-link-title">Allergen &amp; Special Diet Guides</span>
+                  <span class="dropdown-link-meta">
+                    Quick reference for allergies, intolerances, and specialty diets.
+                  </span>
+                </a>
+              </li>
+
+              <li class="dropdown-item">
+                <a
+                  class="dropdown-link"
+                  href="https://example.com/cafeteria-menu"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="dropdown-link-title">Cafeteria &amp; Retail Menus</span>
+                  <span class="dropdown-link-meta">
+                    Daily cafeteria offerings and wellness-focused options.
+                  </span>
+                </a>
+              </li>
+
+              <li class="dropdown-item">
+                <a
+                  class="dropdown-link"
+                  href="https://example.com/policy-procedures"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="dropdown-link-title">Policies &amp; Procedures</span>
+                  <span class="dropdown-link-meta">
+                    Department policies, SOPs, and regulatory reference documents.
+                  </span>
+                </a>
+              </li>
+
+              <li class="dropdown-item">
+                <a
+                  class="dropdown-link"
+                  href="https://example.com/contact-consults"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="dropdown-link-title">Contact &amp; Consults</span>
+                  <span class="dropdown-link-meta">
+                    RD coverage, on-call information, and key phone numbers.
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hub-hint">
+          <span class="dropdown-pill">Note</span>
+          <span>Every resource opens in a new tab so you can keep this hub open in the background.</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const button = document.getElementById("hubDropdownButton");
+      const menu = document.getElementById("hubDropdownMenu");
+
+      function toggleMenu(forceState) {
+        const isOpen =
+          typeof forceState === "boolean"
+            ? !forceState
+            : button.getAttribute("aria-expanded") === "true";
+
+        const nextState = !isOpen;
+        button.setAttribute("aria-expanded", String(nextState));
+        menu.classList.toggle("open", nextState);
+      }
+
+      // Toggle on button click
+      button.addEventListener("click", () => {
+        toggleMenu();
+      });
+
+      // Close if clicking outside
+      document.addEventListener("click", (event) => {
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+          if (button.getAttribute("aria-expanded") === "true") {
+            toggleMenu(true);
+          }
+        }
+      });
+
+      // Keyboard handling: ESC closes
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
+          toggleMenu(true);
+          button.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
